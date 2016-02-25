@@ -6,7 +6,6 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-Palatis KEYWORD1
 InterruptButton	KEYWORD1
 
 #######################################
@@ -24,4 +23,3 @@ attachOnLongPressCallback	KEYWORD2
 #######################################
 # Constants (LITERAL1)
 #######################################
-
