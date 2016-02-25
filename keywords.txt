@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map for InterruptButton
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Palatis KEYWORD1
+InterruptButton	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+end	KEYWORD2
+handleInterrupt	KEYWORD2
+tick	KEYWORD2
+attachOnSingleCallback	KEYWORD2
+attachOnDoubleCallback	KEYWORD2
+attachOnLongPressCallback	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
