@@ -88,16 +88,23 @@ template <
       _processed = false;
     }
 
-    void tick() {
+    /**
+     *  @return true if the button has to be processed again in a near future,
+     *          false otherwise.
+     *          when this function returns false, you can safely put the MCU to
+     *          sleep without breaking functionality.
+     *          however you should still let it to wake up by the pin interrupt.
+     */
+    bool tick() {
       // the event has been processed
       if (_processed)
-        return;
+        return false;
 
       uint32_t now = millis();
 
       // haven't got enough time to confirm an action
       if (now - _up_millis_1 < DOUBLE_TIMEOUT)
-        return;
+        return true;
 
       // key is held for a long time, and not released yet
       if (_up_millis_1 - _down_millis >= 0x80000000) // unsigned negative value
@@ -107,26 +114,28 @@ template <
           _processed = true;
           if (_long_cb != NULL)
             _long_cb();
+          return true;
         }
-        return;
+        return false;
       }
 
       _processed = true;
 
       // it was a long press, should have been processed.
       if (_up_millis_1 - _down_millis > LONGPRESS_TIMEOUT)
-        return;
+        return false;
 
       // two clicks within a short time, should be double click
       if (_down_millis - _up_millis_0 < DOUBLE_TIMEOUT) {
         if (_double_cb != NULL)
           _double_cb();
-        return;
+        return false;
       }
 
       // else it's a short click
       if (_single_cb != NULL)
         _single_cb();
+      return false;
     }
 
     void attachOnSingleCallback(interrupt_button_cb_t callback) {
