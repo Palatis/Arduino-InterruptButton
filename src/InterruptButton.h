@@ -73,23 +73,19 @@ template <
       uint32_t now = millis();
       uint8_t state = digitalRead(_pin);
 
+      if (now - _down_millis < DEBOUNCE_TIMEOUT)
+        return;
+
       if (state == _level) // down
       {
-        if (now - _down_millis < DEBOUNCE_TIMEOUT)
-          return;
-
         _down_millis = now;
-        _processed = false;
       }
       else // up
       {
-        if (now - _up_millis_1 < DEBOUNCE_TIMEOUT)
-          return;
-
         _up_millis_0 = _up_millis_1;
         _up_millis_1 = now;
-        _processed = false;
       }
+      _processed = false;
     }
 
     void tick() {
