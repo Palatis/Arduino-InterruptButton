@@ -101,8 +101,10 @@ template <
         return false;
       
       // we're probably from a long-press reboot
-      if (_down_millis == 0)
+      if (_down_millis == 0) {
+        _processed = true;
         return true;
+      }
 
       uint32_t now = millis();
 
