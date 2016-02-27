@@ -99,6 +99,10 @@ template <
       // the event has been processed
       if (_processed)
         return false;
+      
+      // we're probably from a long-press reboot
+      if (_down_millis == 0)
+        return true;
 
       uint32_t now = millis();
 
